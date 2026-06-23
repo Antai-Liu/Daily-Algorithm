@@ -1,0 +1,62 @@
+11111111111111111111111111111111
+给定一个字符串 s ，请你找出其中不含有重复字符的 最长 子串 的长度。'
+
+my solution
+
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        Map<Character, Integer> map=new HashMap<>();
+        int left = 0;
+        int maxLen = 0;
+       for(int right=0;right<s.length();right++){
+            char c=s.charAt(right);
+            if(map.containsKey(c)&&map.get(c)>=left){
+                left=map.get(c)+1;
+            }
+            map.put(c,right);
+            maxLen = Math.max(maxLen, right - left + 1);
+        } return maxLen;
+    }
+}
+移动窗口 说实话有点难，没学过hashmap。
+left 和right还是很常见的套路，减小复杂度。
+对我来说难点还是containsKey，get，put这些方法，要是早知道leetcode就好了，课本上真是啥用没有。
+
+222222222222222222222222222222222222222
+给你一个整数数组 nums ，判断是否存在三元组 [nums[i], nums[j], nums[k]] 满足 i != j、i != k 且 j != k ，同时还满足 nums[i] + nums[j] + nums[k] == 0 。请你返回所有和为 0 且不重复的三元组。
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+
+        Arrays.sort(nums);             //先进行排序，没什么好说的。
+
+        for (int i = 0; i < nums.length; i++) {   //感觉可以用for each的，但是没啥大必要。
+            if (nums[i] > 0) break;          //这个是小坑，如果最小的都大于零了，就没有必要找和为零的了，其实在写的过程中一般才能想起来，然后补上这一步骤。
+
+            if (i > 0 && nums[i] == nums[i - 1]) continue;   如果有两个一样的比如 11 22 333，没必要比较了，直接跳过
+
+            int left = i + 1;                                 
+            int right = nums.length - 1;            窗口，不解释。
+
+            while (left < right) {                        
+                int sum = nums[i] + nums[left] + nums[right];      
+
+                if (sum == 0) {
+                    result.add(Arrays.asList(nums[i], nums[left], nums[right]));    Arrays.asList 只能背过，没招。
+
+                    while (left < right && nums[left] == nums[left + 1]) left++;              和上面一样，也要考虑到重复的问题。
+                    while (left < right && nums[right] == nums[right - 1]) right--;
+
+                    left++;
+                    right--;
+                } else if (sum < 0) {
+                    left++;
+                } else {
+                    right--;
+                }
+            }
+        }
+
+        return result;
+    }
+}这个题还是比较适合我的，就是细节比较多。学了学List还是比较轻松。
