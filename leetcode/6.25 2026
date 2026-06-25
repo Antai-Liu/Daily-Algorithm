@@ -1,0 +1,18 @@
+11111111111111111111111111111111
+给你一个整数数组 nums ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+
+子数组是数组中的一个连续部分。
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int cur = nums[0];
+        int ans = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            cur = Math.max(nums[i], cur + nums[i]);
+            ans = Math.max(ans, cur);
+        }
+        return ans;
+    }
+}
+最简便聪明的解法，其他的不写了。
+巧妙地运用了Math.max
