@@ -1,0 +1,32 @@
+给定一个整数数组 nums，将数组中的元素向右轮转 k 个位置，其中 k 是非负数。
+
+ 
+
+示例 1:
+
+输入: nums = [1,2,3,4,5,6,7], k = 3
+输出: [5,6,7,1,2,3,4]
+解释:
+向右轮转 1 步: [7,1,2,3,4,5,6]
+向右轮转 2 步: [6,7,1,2,3,4,5]
+向右轮转 3 步: [5,6,7,1,2,3,4]
+
+
+
+
+class Solution {
+    public void rotate(int[] nums, int k) {
+        int length=nums.length;
+         int []numm=new int[nums.length];
+        for(int i=0;i<nums.length;i++){
+            if(k<length){
+            numm[(i+k)%length]=nums[i];
+           }else{numm[(i+k)%length]=nums[i];}
+        }for(int i=0;i<length;i++){
+           nums[i]=numm[i]; 
+        }
+    }
+}
+
+
+我的解法：因为考虑考轮换，想了一个小巧思，直接用新数组先承接，一个k%length直接锁定位置，不需要一步步轮换，而是算出最终的位置。这个是关键。
