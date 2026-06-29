@@ -1,5 +1,7 @@
 给定一个 m x n 的矩阵，如果一个元素为 0 ，则将其所在行和列的所有元素都设为 0 。请使用 原地 算法。
 
+这道题不能边走边算，因为如果看到0，把数字改成0之后，就会循环把改变后的零再次触发条件。
+先标记-->然后同意算出来。
  class Solution {
     public void setZeroes(int[][] matrix) {
         int m = matrix.length, n = matrix[0].length;
