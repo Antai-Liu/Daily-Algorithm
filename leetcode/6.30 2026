@@ -1,0 +1,39 @@
+给定一个 n × n 的二维矩阵 matrix 表示一个图像。请你将图像顺时针旋转 90 度。
+
+你必须在 原地 旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要 使用另一个矩阵来旋转图像。
+
+
+输入：matrix = [[1,2,3],[4,5,6],[7,8,9]]
+输出：[[7,4,1],[8,5,2],[9,6,3]]
+
+
+这道题难点在于怎么将顺时针旋转表示出来。（真不会）
+第一步是transpose，叫做转置。 沿着主对角线翻折。
+
+第二步：每一行左右翻折。（这两步多试试能想出来）
+class Solution {
+    public void rotate(int[][] matrix) {
+        int n=matrix.length;
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                int temp=matrix[i][j];
+                matrix[i][j]=matrix[j][i];
+                matrix[j][i]=temp;
+            }
+
+            刚开始想的是j=i，发现这样的话只能交换对角线上的，没用。j=i+1刚好可以错开，然后沿着对角线翻折（这里没有图很难解释）
+            刚好就是只交换三个数字，如果再往下遍历的话，就是重复了，又交换回去。
+            
+        }    这边是左右交换，想一想就发现这样之后就是顺时针九十度的效果。
+        for(int i=0;i<n;i++){
+            int left=0,right=n-1;
+            while(left<right){      这个其实也是只交换一次，用个循环稍微有点多此一举
+                int tmp=matrix[i][left];
+                matrix[i][left] = matrix[i][right];
+                matrix[i][right] = tmp;
+                left++;
+                right--;
+            }
+        }
+    }
+}
