@@ -1,0 +1,29 @@
+编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target 。该矩阵具有以下特性：
+
+每行的元素从左到右升序排列。
+每列的元素从上到下升序排列。
+
+这道题还是涉及时间复杂度。
+核心解法是：；类二叉搜索树 指针定位法
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if(matrix==null||matrix.length==0||matrix[0].length==0)
+            return false;//首先排除特殊情况，不解释
+        
+        int row=0;
+        int col=matrix[0].length-1;//得到长
+        //确保指针在矩阵范围内移动
+
+        //其实很简单，因为题目说了从左到右变大，从上到下也是变大，我们找一个点，可以是右上角,也可以是左下角。如果是右下角或者是左上角就就不行了，
+        //因为你不知道是加减row还是说clo
+        while(row<matrix.length&&col>=0){
+            if(matrix[row][col]==target)
+            return true;
+            else if (matrix[row][col]>target)
+            col--;
+            else if (matrix[row][col]<target)
+            row++;
+        }return false;
+    }
+}
+这道题我喜欢，不算难，感觉是medium中的easy题，挺有成就感的。
