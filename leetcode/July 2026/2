@@ -1,0 +1,25 @@
+你两个单链表的头节点 headA 和 headB ，请你找出并返回两个单链表相交的起始节点。如果两个链表不存在相交节点，返回 null 。
+
+
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+                              //任一链表为空，则必然不相交
+        if (headA == null || headB == null) {
+            return null;      //先考虑特殊情况。
+        }
+        L pA = headA;
+        L pB = headB;
+        
+                                                // 当 pA 和 pB 相等时跳出循环
+                                                // 如果相交，它们会同时指向相交节点；如果不相交，它们会同时变为 null
+        while (pA != pB) {
+                                                // pA 没走到头就继续往后走，走到头了就转到 headB
+            pA = (pA == null) ? headB : pA.next;
+                                                // pB 没走到头就继续往后走，走到头了就转到 headA
+            pB = (pB == null) ? headA : pB.next;
+        }
+        
+        // 返回任意一个指针即可
+        return pA;
+    }
+}
