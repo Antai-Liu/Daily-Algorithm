@@ -1,3 +1,4 @@
+1111111111111111111111111111111111111111111111111111111111111
 你两个单链表的头节点 headA 和 headB ，请你找出并返回两个单链表相交的起始节点。如果两个链表不存在相交节点，返回 null 。
 
 
@@ -23,3 +24,56 @@ public class Solution {
         return pA;
     }
 }
+22222222222222222222222222222222222222222222222222222222222222222222222
+你这个学期必须选修 numCourses 门课程，记为 0 到 numCourses - 1 。
+
+在选修某些课程之前需要一些先修课程。 先修课程按数组 prerequisites 给出，其中 prerequisites[i] = [ai, bi] ，表示如果要学习课程 ai 则 必须 先学习课程  bi 。
+
+例如，先修课程对 [0, 1] 表示：想要学习课程 0 ，你需要先完成课程 1 。
+请你判断是否可能完成所有课程的学习？如果可以，返回 true ；否则，返回 false 。
+
+class solution{
+    public boolean canFinish(int cumCourses,int [][] prerequisites){
+    //创建数组和表格
+    int[] indegrees=new int [numCourses];
+    List<List<Integer>> adjacency=new ArrayList<>();
+    for(int i=0;i<numCourses;i++){
+        adjacency.add(new ArrayList<>));
+        }
+        Queue<Intefer> queue=new LinkedList<>();
+        for(int i=0;i<numCourses;i++){
+           if(indegrees[i]==0){
+            queue.offer(I);
+            }
+    }int count = 0; // 记录能修完的课程数量
+        while (!queue.isEmpty()) {
+            int curr = queue.poll();
+            count++; // 成功修完一门课
+            
+            // 减少当前课程所有后续课程的入度
+            for (int nextCourse : adjacency.get(curr)) {
+                indegrees[nextCourse]--;
+                // 如果入度减为 0，说明先修课都上完了，可以入队
+                if (indegrees[nextCourse] == 0) {
+                    queue.offer(nextCourse);
+                }
+            }
+        }
+
+        // 5. 如果能修完的课程数等于总课程数，说明无环，返回 true
+        return count == numCourses;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+ 
