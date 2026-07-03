@@ -1,0 +1,16 @@
+给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode cur = head;
+
+        while (cur != null) {
+            ListNode next = cur.next; // 先保存下一个节点
+            cur.next = prev;          // 当前节点指向前一个节点
+            prev = cur;               // prev 往后移动
+            cur = next;               // cur 往后移动
+        }
+
+        return prev;
+    }
+}
