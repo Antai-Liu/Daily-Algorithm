@@ -1,0 +1,35 @@
+给你一个单链表的头节点 head ，请你判断该链表是否为回文链表。如果是，返回 true ；否则，返回 false 。
+
+
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        // 1. 创建一个动态数组，用来存放链表节点的值
+        List<Integer> vals = new ArrayList<>();
+        
+        // 2. 遍历链表，把所有值复制到数组中
+        ListNode currentNode = head;
+        while (currentNode != null) {
+            vals.add(currentNode.val);
+            currentNode = currentNode.next;
+        }
+        
+        // 3. 使用双指针（前后指针）判断数组是否是回文
+        int front = 0;
+        int back = vals.size() - 1;
+        while (front < back) {
+            // 注意：Java 比较 Integer 对象的值，用 !equals 比 != 更安全
+            if (!vals.get(front).equals(vals.get(back))) {
+                return false; // 只要有一对不相等，立刻返回 false
+            }
+            front++; // 前指针往后走
+            back--;  // 后指针往前走
+        }
+        
+        return true; // 全都匹配成功，则是回文
+    }
+}
