@@ -1,16 +1,21 @@
 给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。
 class Solution {
     public ListNode reverseList(ListNode head) {
-        ListNode prev = null;
-        ListNode cur = head;
-
-        while (cur != null) {
-            ListNode next = cur.next; // 先保存下一个节点
-            cur.next = prev;          // 当前节点指向前一个节点
-            prev = cur;               // prev 往后移动
-            cur = next;               // cur 往后移动
+        // 1. 递归终止条件：如果链表为空，或者只有一个节点，不需要反转，直接返回
+        if (head == null || head.next == null) {
+            return head;
         }
-
-        return prev;
+        
+        // 2. 扔给下一层：先让后面所有的节点去反转
+        ListNode newHead = reverseList(head.next);
+        
+        // 3. 关键动作：把后面的小尾巴反过来指向自己
+        head.next.next = head;
+        
+        // 4. 断开原来的指向，防止形成环
+        head.next = null;
+        
+        // 5. 返回新链表的头节点
+        return newHead;
     }
 }
