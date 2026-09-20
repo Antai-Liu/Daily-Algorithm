@@ -1,0 +1,43 @@
+这个题就是一个合并两个有序的链表：
+一个是1到2到4   一个是1到3到4
+需要把他们合成112344
+核心的思想：每次挑一个较小的节点，要准备两个指针，分别指向两条链表当前的节点
+然后进行分别比较，一个是哪个值更小，就把那个节点接到新链表的后面，另一个是被选中的链表指针向后移动一步，然后重复进行比较，直到一个链表走完了
+最后把另一条链表剩余的部分直接接上去
+   class Solution{
+     public ListNode mergeTwoLists(ListNode list1,ListNode list2){
+     //第一个这个是创建一个虚拟头节点
+        ListNode dummy=new ListNode(0);
+        ListNode tail=dummy;
+         while (list1 != null && list2 != null) {
+            if (list1.val <= list2.val) {
+                tail.next = list1;
+                list1 = list1.next;
+            } else {
+                tail.next = list2;
+                list2 = list2.next;
+            }
+
+            // tail 移动到刚刚添加的节点
+            tail = tail.next;
+        }
+
+        // 把没有走完的链表直接接到后面
+        if (list1 != null) {
+            tail.next = list1;
+        } else {
+            tail.next = list2;
+        }
+
+        // dummy 是虚拟节点，真正的头节点是 dummy.next
+        return dummy.next;
+    }
+}
+
+
+
+hot100   2   两数相加
+
+链表为什么是反着的，输入的是l1=2-4-3
+                  还有一个是l2=5-6-4
+      
