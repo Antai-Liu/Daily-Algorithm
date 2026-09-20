@@ -40,4 +40,47 @@ hot100   2   两数相加
 
 链表为什么是反着的，输入的是l1=2-4-3
                   还有一个是l2=5-6-4
-      
+      class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        // 虚拟头节点
+        ListNode dummy = new ListNode(0);
+
+        // current 指向结果链表的最后一个节点
+        ListNode current = dummy;
+
+        // 记录进位
+        int carry = 0;
+
+        // 只要还有节点或者还有进位，就继续计算
+        while (l1 != null || l2 != null || carry != 0) {
+
+            // 如果链表走完了，这一位就按 0 处理
+            int x = (l1 != null) ? l1.val : 0;
+            int y = (l2 != null) ? l2.val : 0;
+
+            // 当前两位加上上一位的进位
+            int sum = x + y + carry;
+
+            // 计算新的进位
+            carry = sum / 10;
+
+            // 当前节点只保存个位数
+            current.next = new ListNode(sum % 10);
+
+            // current 向后移动
+            current = current.next;
+
+            // 两条链表分别向后移动
+            if (l1 != null) {
+                l1 = l1.next;
+            }
+
+            if (l2 != null) {
+                l2 = l2.next;
+            }
+        }
+
+        // 跳过虚拟头节点
+        return dummy.next;
+    }
+}
