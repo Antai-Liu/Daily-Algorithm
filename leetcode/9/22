@@ -1,0 +1,33 @@
+leetcode 19
+这个是删除链表的倒数第n个节点
+
+最经典的方法就是：快慢指针然后加上dummy虚拟头节点
+head=1  2 3 4 5 
+n=2如果说是要删除倒数第二个，就是4，最后就变成了1235
+需要让他们两个指针保持固定的距离
+先建立这个Listnode dummy=new ListNode(0,head);
+          Listnode fast  =dummy;
+          ListNode slow=dummy;
+          dummy  12345
+        一个是fast   一个是slow然后让fast先走n+1步
+
+        这个dummy一起走的时候，fast和slow之间隔着两个节点，如果说slow走到了3，那么fast就走到了5后面那个就是null
+         slow=3，我们想要删除的即使slow.next=4---------------所以就是 sliw.next=4
+              slow.next=slow.next,next;
+              原来的是3 4 5   现在改成了3        5
+              完整的代码
+              class Solution{
+              public ListNode removeNThFRomEND(ListNode head,int n){
+              ListNode dummy=new ListNode(0,head);
+              ListNode fast=dummy;
+              ListNode slow=dummy
+
+              for(int i=0;i<=n;i++){
+                 fast=fast.next;
+                 slow=slow.next;
+                 }
+                 slow.next=slow.next.next;
+                 return dummy.next;
+          }
+    }
+    为什么需要dummy这个节点，因为可能删除的是头节点
