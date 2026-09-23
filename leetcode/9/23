@@ -1,0 +1,40 @@
+leetcode hot100 no24
+这个是两两交换链表中的节点
+
+1234               2143
+
+交换的是节点本身，不是吧1和2的值交换
+
+                      怎么一次性交换两个节点
+                      现在有pre 123   想把他变成pre 213 
+          我们需要记住三个位置，一个是ListNode first=prev.next
+                                    ListNode second =first.nesxt.
+                                  这是时候是prev  first  second  后面
+                                  也就是prev 然后是1 然后是2    3
+                                  进行三次的指针修改
+          第一步是first.next=second.next
+          原来的123   变成了13
+          第二步是second.next=first.
+          然后就是213
+          第三步就是prev.next=second 这个是让前面的节点接到2
+          prev-2-1-3
+          每次交换都是交换prev后面的两个节点
+          class Solution{
+            public ListNode swapParis(ListNode head){
+            ListNode dummy=new ListNode(0,head);
+            ListNode prev=dummy;
+            while(prev.next!=null&&prev.next.next!=null){
+            ListNode fitst=prev.next;
+            ListNode second=fist.next;
+            //Jinxing  交换
+            first.next=second.next;
+            second.next=first;
+            prev.next=second;
+
+            //prev 移动到下一组的前面
+            }
+            return dummy.nextl
+            }}
+
+
+
