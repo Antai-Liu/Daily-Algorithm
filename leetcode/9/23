@@ -35,6 +35,35 @@ leetcode hot100 no24
             }
             return dummy.nextl
             }}
+leetcode 138这个是进行随机链表的复制，它比普通链表多了一个random指针，关键在于怎么不是复制next，而是怎么正确的复制
+random。普通链表的节点只有两个，一个是int val       Node next但是这个题多了一个node random
+每一个节点除了指向下一个节点，还可以随机指向链表里的任意节点，或者说null。
+abdc     然后其中还可能有 a random - c    b  random-null
+如果要复制出一条全新的链表，不能让新链表指回旧链表，比如这个就是错的a random-c
 
 
+
+建立hashmap   Map<Node, Node> map=new HashMap<>();
+里面存着的是旧的节点和新的节点
+分两遍进行遍历
+第一遍是只创建新的节点。
+abc   遍历node cur=head；
+while（cur!=null）{
+  map.put (cur,new Node(cur.val));
+  cur=cur.next;
+}
+A  val=7
+B val=13
+C val=11
+这里执行完之后hashmap里面就是a-a  b-b  c-c
+这时候的新节点还没有连起来，只是建立了abc
+
+第二遍这次是进行复制next和random
+cur=head
+while(cur=!null){
+  map.get(cur).next=map.get(cur.next);
+  map.get(cur).random=map.get(cur.random);
+
+  cur=cur.next;
+)
 
