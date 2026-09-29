@@ -1,0 +1,32 @@
+leetcode 138这个是随机链表的复制
+
+class Node{
+    int val;
+    Node next;
+    Node random;
+  }
+  7-13-11-10-1
+  这些数字都是random的，也可以是null。
+  什么是深度拷贝，  Node copy=head      head 只是复制了让他指向同一个节点
+
+  深度的拷贝需要创建全新的节点，就是原链表a-b    复制链表就是a’  b'
+  而且原先的a不等于a'    原先的b也不等于b'
+  HashMap
+
+  旧的节点   到新的节点。
+  Map<Node, Node> map=new HashMap<>();
+  第一次遍历，只是复制节点。   abc   
+  Node cur=head;
+  while(cur!=null){
+  map.put(cur, new Node(cur.val));
+  cur.cur.next;
+  }
+
+  然后现在，我们只是进行创建节点，还没有链接。
+
+  cur=head;
+  map.get(cur)
+  A'    map.get(cur.next)就是b’
+  所以说 map.get(cur).next=map.get(cur.next);
+  这个就相当于A'.next = B'
+  
